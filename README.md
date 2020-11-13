@@ -1,6 +1,6 @@
-#cmcc-api-transformer
+# api-transformer
 
-该插件用于对定义的由kong代理的api进行参数转换操作，将代理的api转换为后端的实际api
+该插件用于对定义的由kong代理的api进行参数转换操作，将代理的api转换为后端的实际api,参考：https://github.com/cheriL/apig-request-transformer
 
 ## 目录结构
 
