@@ -42,7 +42,7 @@ HEAD /get/{id}/info?name="xxx"
 ```
 而用户想通过kong代理的对外暴露的api定义为（注：cmcc123为前缀）：
 ```
-GET cmcc123/query/{name}/info?id=xxx
+GET /cmcc123/query/{name}/info?id=xxx
 ```
 
 则对应于`api-transformer`插件，其定义为：
@@ -51,7 +51,7 @@ curl -X POST http://<admin-hostname>:8001/routes/<route>/plugins \
     --data "name=api-transformer"  \
     --data "config.http_method=HEAD" \
     --data "config.api_fr_prefix=cmcc123" \
-    --data "config.api_fr_path=/query/{name}/info" \
+    --data "config.api_fr_path=/cmcc123/query/{name}/info" \
     --data "config.api_bk_path=/get/{id}/info" \
     --data "config.api_fr_params=name" \
     --data "config.trans=query:id>path:id" \
