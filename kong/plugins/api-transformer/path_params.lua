@@ -58,9 +58,12 @@ function _M.parse_params(api_fr_path, real_path, api_fr_params, api_fr_prefix)
 	end
 
 	-- remove path prefix
-	if value_list[API_PATH_PREFIX] ==  api_fr_prefix then
-		table.remove(value_list ,API_PATH_PREFIX)
+	if api_fr_prefix then
+		if value_list[API_PATH_PREFIX] ==  api_fr_prefix then
+			table.remove(value_list ,API_PATH_PREFIX)
+		end
 	end
+	
 
 	--get values from config.api_fr_params e.g. id1,id2
 	for i = 1, #api_fr_params do

@@ -6,7 +6,7 @@ local typedefs = require "kong.db.schema.typedefs"
 local add_params = {
   type = "array",
   default = {},
-  elements = { type = "string", match = "^{^:}+:{^:}+:.*$" },
+  elements = { type = "string", match = "^[^:]+:[^:]+:.*$" },
 }
 
 --config.trans的参数存储 原参数位置:参数名;参数位置:参数名
@@ -14,7 +14,7 @@ local add_params = {
 local trans_params = {
   type = "array",
   default = {},
-  elements = { type = "string", match = "^{^:}+:.+>{^:}+:.+$" },
+  elements = { type = "string", match = "^[^:]+:.+>[^:]+:.+$" },
 }
 
 --config.api_fr_path_params  参数名称
@@ -22,7 +22,7 @@ local trans_params = {
 local api_fr_path_params = {
   type = "array",
   default = {},
-  elements = { type = "string", match = "^{^/}+$" },
+  elements = { type = "string", match = "^[^/]+$" },
 }
 
 --config.api_fr_path_params  参数名称
@@ -30,7 +30,7 @@ local api_fr_path_params = {
 local api_bk_path_params = {
   type = "array",
   default = {},
-  elements = { type = "string", match = "^{^/}+$" },
+  elements = { type = "string", match = "^[^/]+$" },
 }
 
 

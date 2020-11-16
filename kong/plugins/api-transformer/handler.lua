@@ -1,64 +1,62 @@
 -- 引入base plugin是可选的，也可以直接定义handler，比如像key-auth的定义
 local BasePlugin = require "kong.plugins.base_plugin"
 local access = require "kong.plugins.api-transformer.access"
-local CmccApiTransformerHandler = BasePlugin:extend()
+local ApiTransformerHandler = BasePlugin:extend()
 
 -- 定义插件的优先级和版本，其中优先级的定义参考https://docs.konghq.com/2.2.x/plugin-development/custom-logic/#plugins-execution-order
-CmccApiTransformerHandler.VERSION  = "1.0.0"
-CmccApiTransformerHandler.PRIORITY = 15
+ApiTransformerHandler.VERSION  = "1.0.0"
+ApiTransformerHandler.PRIORITY = 15
 
 
 -- Your plugin handler's constructor. If you are extending the
 -- Base Plugin handler, it's only role is to instantiate itself
 -- with a name. The name is your plugin name as it will be printed in the logs.
-function CmccApiTransformerHandler:new()
-  CmccApiTransformerHandler.super.new(self, "api-transformer")
+function ApiTransformerHandler:new()
+  ApiTransformerHandler.super.new(self, "api-transformer")
 end
 
 -- http module下，handler总共有8个阶段可以嵌入自己的逻辑，具体阶段见下述代码。
 -- 因为my-plugin将主要处理access阶段，所以其余阶段可以忽略
 
-function CmccApiTransformerHandler:init_worker()
+function ApiTransformerHandler:init_worker()
   -- Eventually, execute the parent implementation
   -- (will log that your plugin is entering this context)
-  CmccApiTransformerHandler.super.init_worker(self)
+  ApiTransformerHandler.super.init_worker(self)
 
   -- Implement any custom logic here
 end
 
 
-function CmccApiTransformerHandler:preread(config)
+function ApiTransformerHandler:preread(config)
   -- Eventually, execute the parent implementation
   -- (will log that your plugin is entering this context)
-  CmccApiTransformerHandler.super.preread(self)
+  ApiTransformerHandler.super.preread(self)
 
   -- Implement any custom logic here
 end
 
 
-function CmccApiTransformerHandler:certificate(config)
+function ApiTransformerHandler:certificate(config)
   -- Eventually, execute the parent implementation
   -- (will log that your plugin is entering this context)
-  CmccApiTransformerHandler.super.certificate(self)
+  ApiTransformerHandler.super.certificate(self)
 
   -- Implement any custom logic here
 end
 
-function CmccApiTransformerHandler:rewrite(config)
+function ApiTransformerHandler:rewrite(config)
   -- Eventually, execute the parent implementation
   -- (will log that your plugin is entering this context)
-  CmccApiTransformerHandler.super.rewrite(self)
+  ApiTransformerHandler.super.rewrite(self)
 
   -- Implement any custom logic here
 end
 
 --主要处理access阶段的功能，config参数为插件在配置时,config内的配置项
-function CmccApiTransformerHandler:access(config)
+function ApiTransformerHandler:access(config)
   -- Eventually, execute the parent implementation
   -- (will log that your plugin is entering this context)
-  CmccApiTransformerHandler.super.access(self)
-
-   apigRequestTransformerHandler.super.access(self)
+   ApiTransformerHandler.super.access(self)
 
     local start_time = os.clock()
     local request_info = { 
@@ -67,8 +65,8 @@ function CmccApiTransformerHandler:access(config)
         querys = kong.request.get_query(),
         path = kong.request.get_path()
     }
-
-    local transformed_request_table = access.execute(request_table, conf)
+    kong.log.debug("[api-transformer] start access execute. req path"..request_info.path)
+    local transformed_request_table = access.execute(request_info, config)
 
     if transformed_request_table.method then
         kong.log.debug("[api-transformer]method trans to : "..transformed_request_table.method..".")
@@ -93,29 +91,29 @@ function CmccApiTransformerHandler:access(config)
     kong.log.debug("[api-transformer] spend time : " .. os.clock() - start_time .. ".")
 end
 
-function CmccApiTransformerHandler:header_filter(config)
+function ApiTransformerHandler:header_filter(config)
   -- Eventually, execute the parent implementation
   -- (will log that your plugin is entering this context)
-  CmccApiTransformerHandler.super.header_filter(self)
+  ApiTransformerHandler.super.header_filter(self)
 
   -- Implement any custom logic here
 end
 
-function CmccApiTransformerHandler:body_filter(config)
+function ApiTransformerHandler:body_filter(config)
   -- Eventually, execute the parent implementation
   -- (will log that your plugin is entering this context)
-  CmccApiTransformerHandler.super.body_filter(self)
+  ApiTransformerHandler.super.body_filter(self)
 
   -- Implement any custom logic here
 end
 
-function CmccApiTransformerHandler:log(config)
+function ApiTransformerHandler:log(config)
   -- Eventually, execute the parent implementation
   -- (will log that your plugin is entering this context)
-  CmccApiTransformerHandler.super.log(self)
+  ApiTransformerHandler.super.log(self)
 
   -- Implement any custom logic here
 end
 
-return CmccApiTransformerHandler
+return ApiTransformerHandler
 
