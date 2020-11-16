@@ -46,11 +46,11 @@ return {
           -- backend method
           { http_method = typedefs.http_method },
           -- api front path prefix
-          { api_fr_prefix = {type = "string", required = true}},
+          { api_fr_prefix = {type = "string"}},
           -- api frontend path define
-          { api_fr_path = { type = "string", required = true } },
+          { api_fr_path = { type = "string"} },
           -- api backend path define
-          { api_bk_path = { type = "string" , required = true} },
+          { api_bk_path = { type = "string"} },
           -- api frontend path params
           { api_fr_params = api_fr_path_params },
           -- api backend path params
