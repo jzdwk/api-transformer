@@ -60,7 +60,7 @@ http GET /query/{name1}/info/{name2}?id=xxx
 
 而被kong代理的后端api(即back_api)定义为:
 ```
-http HEAD /get/{id}/info?name1="xxx"&&name2="xxx"&&name3="xxx"
+http HEAD /get/{id}/info?name1="xxx"&&name2="xxx"
 ```
 
 根据以上场景，对于api模板的`CreateApiTemplate(templateInfo *apimd.ApiTplPost) (uuid string, err error)`接口来说(/apigw/manager/api_tpl.go)，其body值为,其中xxxx表示不涉及转换逻辑的值：
@@ -126,11 +126,7 @@ http HEAD /get/{id}/info?name1="xxx"&&name2="xxx"&&name3="xxx"
 	  {
         "name": "name3",
         "location": 2
-      },
-	  {
-		"name": "id",
-        "location": 1
-	  }
+      }
     ]
   }
 }
@@ -164,13 +160,6 @@ http HEAD /get/{id}/info?name1="xxx"&&name2="xxx"&&name3="xxx"
       "ParamSrcName": "id",
       "ParamDescPos": 1,
       "ParamDescName": "id"
-    }
-  ],
-  "Add": [
-    {
-      "ParamPos": 2,
-      "ParamName": "name3",
-      "ParamValue": "xxx"
     }
   ]
 }
