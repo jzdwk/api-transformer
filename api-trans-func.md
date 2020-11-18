@@ -158,6 +158,12 @@ http HEAD /get/{id}/info?name1="xxx"&&name2="xxx"&&name3="xxx"
       "ParamSrcName": "name2",
       "ParamDescPos": 2,
       "ParamDescName": "name2"
+    },
+    {
+      "ParamSrcPos": 2,
+      "ParamSrcName": "id",
+      "ParamDescPos": 1,
+      "ParamDescName": "id"
     }
   ],
   "Add": [
