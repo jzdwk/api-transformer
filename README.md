@@ -26,7 +26,7 @@ config.api_fr_prefix kong代理的请求参数前缀，主要用于处理api的p
 config.api_fr_path kong代理的api请求路径，path中可携带参数，比如/get/{id}/info
 config.api_bk_path 实际的上游服务api请求路径，path中可携带参数，比如/get/{id2}/info
 config.api_fr_params  kong代理的api中，在path上的请求参数组成的列表，比如/get/{id2}/info/{name},即为id2,name
-config.trans 参数转换列表，语法为 原参数位置:原参数名>参数位置，参数名，参数位置的取值为head,query,path
+config.trans 参数转换列表，语法为 原参数位置:原参数名>参数位置:参数名，参数位置的取值为head,query,path
 config.add 参数增添列表，语法为 参数位置：参数名：参数值，参数位置的取值为head,query,path
 ```
 
