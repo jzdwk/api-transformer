@@ -248,6 +248,8 @@ local function transform_param(real_req, trans_table, conf)
     local trans  = 0 < #conf.trans
     local add = 0 < #conf.add
     if not trans and not add then
+         --如果不需要处理参数，直接返回后端路径 
+        trans_table.path = api_bk_path 
         return trans_table
     end
     local query_changed
