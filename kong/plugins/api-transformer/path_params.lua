@@ -21,7 +21,7 @@ end
 
 
 -- api_fr_path 即config.api_fr_path的定义, e.g. /req/{id1}/info/{id2}
--- real_path 即实际的请求uri，比如 /req/100/info/200
+-- real_path 即实际的请求uri，比如 /cmcc/req/100/info/200
 -- api_fr_params 即config.api_fr_params，e.g. id1 id2
 -- e.g.
 -- api_fr_path = "/get/{id1}/info/{id2}"
@@ -59,8 +59,10 @@ function _M.parse_params(api_fr_path, real_path, api_fr_params, api_fr_prefix)
 
 	-- remove path prefix
 	if api_fr_prefix then
-		if value_list[API_PATH_PREFIX] ==  api_fr_prefix then
-			table.remove(value_list ,API_PATH_PREFIX)
+		for k in string.gmatch(api_fr_prefix, "([^/]+)") do	
+			if value_list[API_PATH_PREFIX] ==  k then
+				table.remove(value_list ,API_PATH_PREFIX)
+			end
 		end
 	end
 	
