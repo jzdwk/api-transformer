@@ -51,7 +51,7 @@ curl -X POST http://<admin-hostname>:8001/routes/<route>/plugins \
     --data "name=api-transformer"  \
     --data "config.http_method=HEAD" \
     --data "config.api_fr_prefix=cmcc123" \
-    --data "config.api_fr_path=/cmcc123/query/{name}/info" \
+    --data "config.api_fr_path=/query/{name}/info" \
     --data "config.api_bk_path=/get/{id}/info" \
     --data "config.api_fr_params=name" \
     --data "config.trans=query:id>path:id" \
