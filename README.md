@@ -46,7 +46,7 @@ GET /cmcc123/query/{name}/info?id=xxx
 ```
 
 则对应于`api-transformer`插件，其定义为：
-```json
+```
 curl -X POST http://<admin-hostname>:8001/routes/<route>/plugins \
     --data "name=api-transformer"  \
     --data "config.http_method=HEAD" \
@@ -58,6 +58,5 @@ curl -X POST http://<admin-hostname>:8001/routes/<route>/plugins \
     --data "config.trans=path:name>query:id" \
     --data "config.add=head:h1:v1" \
 ```
-
 
 
